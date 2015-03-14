@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<div class="chat_container">
+  <div id="chat_room">
+    <p class="alert"> Welcome to the chat room <%= current_user.name %>! </p>
+  </div>
+
+  <form id="new_message_form">
+    <input type="text" id="message" name="message">
+    <input type="submit" value="Send">
+  </form>
+</div>
+
+<p>
+  <strong>Name:</strong>
+  <%= @chat_room.name %>
+</p>
+
+<%= link_to 'Edit', edit_chat_room_path(@chat_room) %> |
+<%= link_to 'Back', chat_rooms_path %>
+
+<script>
+    $(function() {
+        // Create a new client to connect to Faye
+        var client = new Faye.Client('http://localhost:9292/faye');
+
+        // Handle form submissions and post messages to faye
+        $('#new_message_form').submit(function(){
+            // Publish the message to the public channel
+            client.publish('/messages/public', {
+                username: '<%= current_user.name %>',
+                msg: $('#message').val()
+            });
+
+            // Clear the message box
+            $('#message').val('');
+
+            // Don't actually submit the form, otherwise the page will refresh.
+            return false;
+        });
+
+        var public_subscription = client.subscribe('/messages/public', function(data) {
+            $('<p></p>').html(data.username + ": " + data.msg).appendTo('#chat_room');
+        });
+
+    });
+</script>
