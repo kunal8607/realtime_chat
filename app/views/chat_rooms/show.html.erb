@@ -23,11 +23,12 @@
     $(function() {
         // Create a new client to connect to Faye
         var client = new Faye.Client('http://localhost:9292/faye');
-
+        var channel = '<%= "/" + params[:id] %>'
         // Handle form submissions and post messages to faye
         $('#new_message_form').submit(function(){
             // Publish the message to the public channel
-            client.publish('/messages/public', {
+
+            client.publish(channel, {
                 username: '<%= current_user.name %>',
                 msg: $('#message').val()
             });
@@ -39,7 +40,7 @@
             return false;
         });
 
-        var public_subscription = client.subscribe('/messages/public', function(data) {
+        var public_subscription = client.subscribe(channel, function(data) {
             $('<p></p>').html(data.username + ": " + data.msg).appendTo('#chat_room');
         });
 
