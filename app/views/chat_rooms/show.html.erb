@@ -1,4 +1,3 @@
-<!--<p id="notice"><%= notice %></p>-->
 
 <div class="chat_container">
   <p class="welcome"> Hi <%= current_user.name %>, Welcome to chat room <%= @chat_room.name %> </p>
@@ -17,26 +16,27 @@
 
 <script>
     $(function() {
-        // Create a new client to connect to Faye
-        var client = new Faye.Client('http://localhost:9292/faye');
+        // get a new faye client
+        var faye_client = new Faye.Client('http://localhost:9292/faye');
+        // set the channel as there are multiple channels(chat_rooms)
         var channel = '<%= "/chat_room/" + params[:id] %>'
-        // Handle form submissions and post messages to faye
-        $('#new_message_form').submit(function(){
-            // Publish the message to the public channel
 
-            client.publish(channel, {
+        $('#new_message_form').submit(function(){
+            // Publish the message to the channel
+
+            faye_client.publish(channel, {
                 username: '<%= current_user.name %>',
                 msg: $('#message').val()
             });
 
-            // Clear the message box
             $('#message').val('');
 
-            // Don't actually submit the form, otherwise the page will refresh.
+            // to prevent page from being refresh
             return false;
         });
 
-        var public_subscription = client.subscribe(channel, function(data) {
+        //subscribe the message from channel
+        var subscription = faye_client.subscribe(channel, function(data) {
             chat_container = $('#chat_room_container')
             html_string = "<p> <b>" + data.username +"</b>: "+ data.msg +"</p>"
             chat_container.append(html_string);
