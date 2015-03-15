@@ -1,6 +1,9 @@
 <%- model_class = ChatRoom -%>
 <div class="page-header">
-  <h3><%="Select any chat room" %></h3>
+
+  <h3><%=link_to "Create a new room", new_chat_room_path %></h3>
+
+  <h3><%="Or select any chat room" %></h3>
 </div>
 <table class="table table-striped">
   <thead>

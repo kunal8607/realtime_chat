@@ -13,3 +13,27 @@
  *= require_tree .
  *= require_self
  */
+
+
+#chat_room_container{
+
+    width: 305px;
+    background-color: beige;
+    padding: 20px;
+    margin: 22px;
+    overflow-y: auto;
+    height: 100px;
+}
+
+.welcome{
+
+    background-color: azure;
+    margin: 22px;
+    padding: 20px;
+    border-radius: 2px;
+}
+
+#chat_form{
+    margin: 20px;
+}
+

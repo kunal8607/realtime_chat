@@ -1,23 +1,19 @@
 <!--<p id="notice"><%= notice %></p>-->
 
 <div class="chat_container">
-  <div id="chat_room">
-    <p class="alert"> Welcome to the chat room <%= current_user.name %>! </p>
+  <p class="welcome"> Hi <%= current_user.name %>, Welcome to chat room <%= @chat_room.name %> </p>
+  <div id="chat_room_container" class='c'>
+
   </div>
 
-  <form id="new_message_form">
-    <input type="text" id="message" name="message">
-    <input type="submit" value="Send">
-  </form>
+  <div id="chat_form">
+    <form id="new_message_form">
+      <input type="text" id="message" name="message">
+      <input type="submit" value="Send">
+    </form>
+    <%= link_to 'Back', chat_rooms_path %>
+  </div>
 </div>
-
-<p>
-  <strong>Name:</strong>
-  <%= @chat_room.name %>
-</p>
-
-<%= link_to 'Edit', edit_chat_room_path(@chat_room) %> |
-<%= link_to 'Back', chat_rooms_path %>
 
 <script>
     $(function() {
@@ -41,7 +37,11 @@
         });
 
         var public_subscription = client.subscribe(channel, function(data) {
-            $('<p></p>').html(data.username + ": " + data.msg).appendTo('#chat_room');
+            chat_container = $('#chat_room_container')
+            html_string = "<p> <b>" + data.username +"</b>: "+ data.msg +"</p>"
+            chat_container.append(html_string);
+            chat_container.scrollTop(chat_container.prop("scrollHeight"));
+
         });
 
     });
