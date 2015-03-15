@@ -13,9 +13,9 @@ For more details please refer [ faye](http://faye.jcoglan.com/)
 *   rake db:create && rake db:migrate
 *   Faye needs to run on a separate web server from the web application itself; to accomplish this, you have created a Rackup config file faye.ru in root directory.For more details please refer[ setting up faye](http://faye.jcoglan.com/ruby.html) Now to start the faye server using
 
-rackup faye.ru -E production -s thin
+  rackup faye.ru -E production -s thin
 
-The default port of faye is 9292.
-All the configuration for faye are made in development.yml and production.yml. You can change that configuration according to your own.
+  The default port of faye is 9292.
+  All the configuration for faye are made in development.yml and production.yml. You can change that configuration according to your own.
 
 *   Start the rails server using rails s
