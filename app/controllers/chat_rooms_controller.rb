@@ -74,6 +74,7 @@ class ChatRoomsController < ApplicationController
     end
 
   def check_user_profile
-    redirect_to edit_user_path(current_user)  if current_user.name.nil?
+    logger.info("user profile")
+    redirect_to edit_user_path(current_user)  unless current_user.name.present?
   end
 end

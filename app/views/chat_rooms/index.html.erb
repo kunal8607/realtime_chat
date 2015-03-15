@@ -2,10 +2,14 @@
 <div class="page-header">
 
   <h3><%=link_to "Create a new room", new_chat_room_path %></h3>
-
+  <%- if @chat_rooms.any?%>
   <h3><%="Or select any chat room" %></h3>
+  <%-end%>
 </div>
-<table class="table table-striped">
+ <%- if @chat_rooms.empty?%>
+  <h3><%="No chat rooms available" %></h3>
+  <%- else%>
+  <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
@@ -24,3 +28,4 @@
     <% end %>
   </tbody>
 </table>
+  <%-end%>
