@@ -10,6 +10,8 @@ For more details please refer [ faye](http://faye.jcoglan.com/)
 *   Install ruby
 *   Clone this repo
 *   Bundle install
-*   Faye needs to run on a separate web server from the web application itself; to accomplish this, you have created a Rackup config file faye.ru in root directory.For more details please refer[ setting up faye](http://faye.jcoglan.com/ruby.html) Now to start the faye server using **rackup faye.ru -E production -s thin **
+*   rake db:create && rake db:migrate
+*   Faye needs to run on a separate web server from the web application itself; to accomplish this, you have created a Rackup config file faye.ru in root directory.For more details please refer[ setting up faye](http://faye.jcoglan.com/ruby.html) Now to start the faye server using
+    rackup faye.ru -E production -s thin
 
 *   Start the rails server using rails s
