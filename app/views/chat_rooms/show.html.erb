@@ -1,7 +1,7 @@
 
 <div class="chat_container">
   <p class="welcome"> Hi <%= current_user.name %>, Welcome to chat room <%= @chat_room.name %> </p>
-  <div id="chat_room_container" class='c'>
+  <div id="chat_room_container">
 
   </div>
 
@@ -17,7 +17,7 @@
 <script>
     $(function() {
         // get a new faye client
-        var faye_client = new Faye.Client('http://localhost:9292/faye');
+        var faye_client = new Faye.Client('<%= Settings.faye_hosting_url %>');
         // set the channel as there are multiple channels(chat_rooms)
         var channel = '<%= "/chat_room/" + params[:id] %>'
 
@@ -37,8 +37,8 @@
 
         //subscribe the message from channel
         var subscription = faye_client.subscribe(channel, function(data) {
-            chat_container = $('#chat_room_container')
-            html_string = "<p> <b>" + data.username +"</b>: "+ data.msg +"</p>"
+            var chat_container = $('#chat_room_container')
+            var html_string = "<p> <b>" + data.username +"</b>: "+ data.msg +"</p>"
             chat_container.append(html_string);
             chat_container.scrollTop(chat_container.prop("scrollHeight"));
 

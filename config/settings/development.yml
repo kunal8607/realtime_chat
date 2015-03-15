@@ -1,0 +1,2 @@
+faye_hosting_url: 'http://localhost:9292/faye'
+faye_js_path: "http://localhost:9292/faye/faye.js"
