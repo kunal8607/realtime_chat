@@ -1,5 +1,6 @@
 class ChatRoomsController < ApplicationController
   before_action :set_chat_room, only: [:show, :edit, :update, :destroy]
+  before_filter :check_user_profile
 
   # GET /chat_rooms
   # GET /chat_rooms.json
@@ -71,4 +72,8 @@ class ChatRoomsController < ApplicationController
     def chat_room_params
       params.require(:chat_room).permit(:name)
     end
+
+  def check_user_profile
+    redirect_to edit_user_path(current_user)  if current_user.name.nil?
+  end
 end

@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>-->
 
 <div class="chat_container">
   <div id="chat_room">
@@ -23,7 +23,7 @@
     $(function() {
         // Create a new client to connect to Faye
         var client = new Faye.Client('http://localhost:9292/faye');
-        var channel = '<%= "/" + params[:id] %>'
+        var channel = '<%= "/chat_room/" + params[:id] %>'
         // Handle form submissions and post messages to faye
         $('#new_message_form').submit(function(){
             // Publish the message to the public channel

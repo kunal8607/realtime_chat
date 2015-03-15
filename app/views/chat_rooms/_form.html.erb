@@ -1,21 +1,14 @@
-<%= form_for(@chat_room) do |f| %>
-  <% if @chat_room.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@chat_room.errors.count, "error") %> prohibited this chat_room from being saved:</h2>
-
-      <ul>
-      <% @chat_room.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_for @chat_room, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                chat_rooms_path, :class => 'btn' %>
   </div>
 <% end %>
