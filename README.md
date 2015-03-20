@@ -1,6 +1,6 @@
 ### Real Time Chat Application
 
-This Application is the real time chat application in rails and for real time server push event it is using the the faye
+This Application is the real time chat application in rails and for real time server push event it is using the faye
 
 Faye is a publish-subscribe messaging system based on the Bayeux protocol. It provides message servers for Node.js and Ruby, and clients for use on the server and for web browsers.
 For more details please refer [ faye](http://faye.jcoglan.com/)
